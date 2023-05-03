@@ -6,6 +6,7 @@ import UserContext from '../../context/User/UserContext'
 import Notification from '../../Notifications/Notifications';
 
 const UserProfile = () => {
+    const host = process.env.REACT_APP_API_URL;
     const { user, getUserDetails } = useContext(UserContext);
     const [userDetails, setUserDetails] = useState({ name: "", email: "", city: "", address: "", phone: "", company: "", role: "" });
     const { name, email, address, phone, company, city, role } = userDetails;
@@ -23,7 +24,7 @@ const UserProfile = () => {
     const updateFun = async () => {
         try {
             // const data = await axios.put(`/api/auth/update/${user._id}`, userDetails);
-            await axios.put(`/api/auth/update/${user._id}`, userDetails);
+            await axios.put(`${host}/api/auth/update/${user._id}`, userDetails);
             Notification("Success", "Successfully updated", "success");
             await getUserDetails();
             Navigate('/Dashboard');

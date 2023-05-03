@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 
 const EditOrderAdminD = () => {
+  const host = process.env.REACT_APP_API_URL;
   const [trackingId, setTrackingId] = useState("");
   const [courierServiceName, setcourierServiceName] = useState("");
   const [shippingDetails, setShippingDetails] = useState({
@@ -14,12 +15,12 @@ const EditOrderAdminD = () => {
   });
 
   const getDetails = async () => {
-    const { data } = await axios.get(`http://localhost:5000/api/order/orderproduct/${id}`);
+    const { data } = await axios.get(`${host}/api/order/orderproduct/${id}`);
     setShippingDetails(data.billingDetails);
   };
 
   const getTracking = async () => {
-    const { data } = await axios.get(`http://localhost:5000/api/order/trackingid/${id}`);
+    const { data } = await axios.get(`${host}/api/order/trackingid/${id}`);
     setTrackingId(data.trackingId);
     setcourierServiceName(data.courierServiceName);
   };
@@ -54,7 +55,7 @@ const EditOrderAdminD = () => {
     e.preventDefault();
     try {
 
-      await axios.put(`http://localhost:5000/api/order/updateshippingdetails/${id}`, {
+      await axios.put(`${host}/api/order/updateshippingdetails/${id}`, {
         name: shippingDetails.name,
         address: shippingDetails.address,
         email: shippingDetails.email,
@@ -64,7 +65,7 @@ const EditOrderAdminD = () => {
       console.log(shippingDetails)
 
       await axios
-        .put(`http://localhost:5000/api/order/updatetrackingdetails/${id}`, {
+        .put(`${host}/api/order/updatetrackingdetails/${id}`, {
           trackingId,
           courierServiceName,
         })

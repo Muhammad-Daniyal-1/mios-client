@@ -31,17 +31,21 @@ export class Login extends Component {
     this.setState({ loading: true });
     this.login(this.state.email, this.state.password);
   }
-
+  host = process.env.REACT_APP_API_URL;
   login = async (email, password) => {
     try {
-      const response = await axios.post("/api/auth/login", {
+      console.log(email, password);
+      console.log(`${this.host}/api/auth/login`);
+      const response = await axios.post(`${this.host}/api/auth/login`, {
         headers: {
           "Content-Type": "application/json",
         },
         email, password
       });
       if (response.data?.authtoken) {
+        console.log(response.data.authtoken);
         this.setState({ user: response.data.authtoken });
+        // console.log(this.state.user);
         window.location.reload();
       }
     } catch (e) {

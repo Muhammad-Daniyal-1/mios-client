@@ -10,6 +10,8 @@ import Loader from '../../Loader/Loader';
 import Notification from '../../Notifications/Notifications';
 
 const PlaceOrder = () => {
+    const host = process.env.REACT_APP_API_URL;
+
     const { CartItems, subTotal, Cart, shippCat } = useContext(ProductContext);
     const { user } = useContext(UserContext);
     const { getMyOrders } = useContext(OrderContext);
@@ -187,7 +189,7 @@ const PlaceOrder = () => {
             const orderValues = { ...orderDetails, total, shipping, orderType };
             try {
                 setLoading(true);
-                await axios.post('/api/order/placeOrder', orderValues);
+                await axios.post(`${host}/api/order/placeOrder`, orderValues);
                 setLoading(false);
                 Notification("Success", "Ordered Successfully", "success");
                 setShippingDetails((prevVal) => ({

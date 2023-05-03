@@ -17,10 +17,10 @@ export class Shippingcost extends Component {
     this.closeRef = React.createRef();
   }
 
-
+  host = process.env.REACT_APP_API_URL;
 
   async componentDidMount() {
-    let url = `http://localhost:5000/api/shipping/shippingcalc`;
+    let url = `${this.host}/api/shipping/shippingcalc`;
     this.setState({ loading: true });
     let data = await fetch(url);
     data = await data.json();
@@ -53,14 +53,14 @@ export class Shippingcost extends Component {
     }
 
     this.setState({ loading: true });
-    await fetch(`http://localhost:5000/api/shipping/editshippingcalc/${shippingId}`, {
+    await fetch(`${this.host}/api/shipping/editshippingcalc/${shippingId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(shippingcalc),
     });
-    let url = `http://localhost:5000/api/shipping/shippingcalc`;
+    let url = `${this.host}/api/shipping/shippingcalc`;
     let uProducts = await fetch(url);
     let pro = await uProducts.json();
     this.setState({ shipping: pro, loading: false });
@@ -74,13 +74,13 @@ export class Shippingcost extends Component {
 
   handleDelete = async (id) => {
     this.setState({ loading: true });
-    await fetch(`http://localhost:5000/api/shipping/deleteshippingcalc/${id}`, {
+    await fetch(`${this.host}/api/shipping/deleteshippingcalc/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    let url = `http://localhost:5000/api/shipping/shippingcalc`;
+    let url = `${this.host}/api/shipping/shippingcalc`;
     let uProducts = await fetch(url);
     let pro = await uProducts.json();
     this.setState({ shipping: pro, loading: false });

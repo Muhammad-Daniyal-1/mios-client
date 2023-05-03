@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import Notification from "../../Notifications/Notifications";
 const image = window.location.origin + "/Assets/no-data.svg";
 const PendingByOrder = () => {
+    const host = process.env.REACT_APP_API_URL;
     const [allProfits, setAllProfits] = useState([]);
     useEffect(() => {
         getAllProfits();
@@ -12,13 +13,13 @@ const PendingByOrder = () => {
     }, [])
     const { id } = useParams();
     const getAllProfits = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/profitrecords/pendingprofitsbyuser/${id}`);
+        const { data } = await axios.get(`${host}/api/profitrecords/pendingprofitsbyuser/${id}`);
         setAllProfits(data);
     }
 
     const paySingleProfits = async (user, amount, orderId) => {
         try {
-            const { data } = await axios.post('http://localhost:5000/api/profitrecords/paySingleProfit', { userId: user, amount, orderId });
+            const { data } = await axios.post(`${host}/api/profitrecords/paySingleProfit`, { userId: user, amount, orderId });
             Notification('Success', data.message, 'success')
             await getAllProfits();
         } catch (error) {
