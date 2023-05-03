@@ -34,8 +34,6 @@ export class Login extends Component {
   host = process.env.REACT_APP_API_URL;
   login = async (email, password) => {
     try {
-      console.log(email, password);
-      console.log(`${this.host}/api/auth/login`);
       const response = await axios.post(`${this.host}/api/auth/login`, {
         headers: {
           "Content-Type": "application/json",
