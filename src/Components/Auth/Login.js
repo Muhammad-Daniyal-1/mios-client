@@ -41,9 +41,7 @@ export class Login extends Component {
         email, password
       });
       if (response.data?.authtoken) {
-        console.log(response.data.authtoken);
         this.setState({ user: response.data.authtoken });
-        // console.log(this.state.user);
         window.location.reload();
       }
     } catch (e) {
