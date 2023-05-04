@@ -62,7 +62,7 @@ import EditOrderAdminD from './AdminComponents/Orders/EditOrderAdminD';
 import OrderReport from './AdminComponents/Reports/OrderReport';
 // import DropshipPending from './AdminComponents/Dropshippersprofit/DropshipPending';
 // import PendingByOrder from './AdminComponents/Dropshippersprofit/PendingByOrder';
-
+axios.defaults.withCredentials = true;
 function App() {
   const host = process.env.REACT_APP_API_URL;
   let [user, setUser] = useState({});

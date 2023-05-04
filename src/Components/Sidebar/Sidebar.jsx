@@ -30,13 +30,11 @@ export default function Sidebar() {
             const pending = await axios.get(`${host}/api/order/pendingOrders`)
             const shipped = await axios.get(`${host}/api/order/shippedOrders`)
             const delivered = await axios.get(`${host}/api/order/deliveredOrders`)
-            const returned = await axios.get('/api/order/returnedOrders')
+            const returned = await axios.get(`${host}/api/order/returnedOrders`)
             setNumbers({ pending: pending?.data?.length, shipped: shipped?.data?.length, delivered: delivered?.data?.length, returned: returned?.data?.length })
             const { data } = await axios.get(`${host}/api/product/catcount`);
             setCount(data.count);
-
         }
-
         getNumbers();
     }, [location.pathname])
     const { CartItems, categories } = useContext(ProductContext);
